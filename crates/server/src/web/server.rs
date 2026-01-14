@@ -26,7 +26,7 @@ impl WebServer {
 
 #[get("/nodes")]
 async fn nodes() -> Result<Json<Vec<Node>>> {
-    let nodes = crate::data::mempool::Node::get().await.expect("Something");
+    let nodes = crate::data::mempool::Node::get().await?;
     let nodes = nodes.into_iter().map(Node::from).collect::<Vec<_>>();
     Ok(Json(nodes))
 }
