@@ -12,10 +12,10 @@ impl Importer {
         tokio::spawn(async move {
             let mut interval = tokio::time::interval(tokio::time::Duration::from_secs(60));
             loop {
-                interval.tick().await;
                 if let Err(_e) = Self::import_routine(&connection).await {
                     // TODO: Do something about it.
                 }
+                interval.tick().await;
             }
         });
         Ok(())
