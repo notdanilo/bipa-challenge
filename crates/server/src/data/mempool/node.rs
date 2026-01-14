@@ -8,11 +8,11 @@ pub struct Node {
     /// Node alias
     pub alias: String,
     /// Capacity in satoshis
-    pub capacity: u64,
+    pub capacity: i64,
     /// First seen timestamp in unix time
-    pub first_seen: u64,
+    pub first_seen: i64,
     /// Last updated timestamp in unix time
-    pub updated_at: u64,
+    pub updated_at: i64,
 }
 
 impl Node {

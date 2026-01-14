@@ -8,6 +8,8 @@ pub enum Error {
     Reqwest(#[from] reqwest::Error),
     #[error("Deserialization error: {0}")]
     Deserialization(#[from] serde_json::Error),
+    #[error("Invalid timestamp")]
+    InvalidTimestamp,
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
@@ -18,6 +20,7 @@ impl actix_web::ResponseError for Error {
             Self::Io(io) => actix_web::HttpResponse::InternalServerError().body(io.to_string()),
             Self::Reqwest(reqwest) => actix_web::HttpResponse::InternalServerError().body(reqwest.to_string()),
             Self::Deserialization(serde_json) => actix_web::HttpResponse::InternalServerError().body(serde_json.to_string()),
+            Self::InvalidTimestamp => actix_web::HttpResponse::InternalServerError().body("Invalid timestamp".to_string()),
         }
     }
 }
