@@ -1,6 +1,16 @@
-[package]
-name = "challenge"
+[workspace]
+resolver = "2"
+members = [
+    "crates/*",
+]
+
+[workspace.package]
 version = "0.1.0"
 edition = "2024"
 
-[dependencies]
+[workspace.dependencies]
+tokio = { version = "1.49.0", features = ["full"] }
+anyhow = "1.0.100"
+reqwest = { version = "0.13.1", features = ["json"] }
+serde = { version = "1.0.228", features = ["derive"] }
+# thiserror = "2.0.17"
