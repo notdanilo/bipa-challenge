@@ -1,7 +1,7 @@
 use server::prelude::*;
 
-use server::WebServer;
-use server::Importer;
+use server::web::WebServer;
+use server::importer::Importer;
 use server::database::Database;
 
 #[tokio::main]

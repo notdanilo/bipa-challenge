@@ -1,3 +1,5 @@
+pub mod mempool;
+
 use crate::prelude::*;
 use crate::database::Database;
 
@@ -20,7 +22,7 @@ impl Importer {
     }
 
     async fn import_routine(database: &Database) -> Result<()> {
-        let nodes = crate::data::mempool::Node::get().await?;
+        let nodes = crate::importer::mempool::Node::get().await?;
         database.upsert_nodes(nodes).await?;
         Ok(())
     }

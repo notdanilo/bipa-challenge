@@ -11,8 +11,8 @@ pub struct Node {
     pub first_seen: i64
 }
 
-impl From<crate::data::mempool::Node> for Node {
-    fn from(value: crate::data::mempool::Node) -> Self {
+impl From<crate::importer::mempool::Node> for Node {
+    fn from(value: crate::importer::mempool::Node) -> Self {
         Self {
             public_key: value.public_key,
             alias: value.alias,

@@ -32,7 +32,7 @@ impl Database {
         Ok(Self { pool })
     }
 
-    pub async fn upsert_nodes(&self, nodes: Vec<crate::data::mempool::Node>) -> Result<()> {
+    pub async fn upsert_nodes(&self, nodes: Vec<crate::importer::mempool::Node>) -> Result<()> {
         let mut tx = self.pool.begin().await?;
         for node in nodes {
             Self::upsert_node(&mut tx, node).await?;
@@ -41,9 +41,9 @@ impl Database {
         Ok(())
     }
 
-    pub async fn read_nodes(&self) -> Result<Vec<crate::data::mempool::Node>> {
+    pub async fn read_nodes(&self) -> Result<Vec<crate::importer::mempool::Node>> {
         let nodes = sqlx::query_as!(
-            crate::data::mempool::Node,
+            crate::importer::mempool::Node,
             r#"
             SELECT
                 public_key as "public_key!",
@@ -60,7 +60,7 @@ impl Database {
         Ok(nodes)
     }
 
-    async fn upsert_node(tx: &mut sqlx::Transaction<'_, sqlx::Sqlite>, node: crate::data::mempool::Node) -> Result<()> {
+    async fn upsert_node(tx: &mut sqlx::Transaction<'_, sqlx::Sqlite>, node: crate::importer::mempool::Node) -> Result<()> {
         tx.execute(
             sqlx::query!(
                 r#"
