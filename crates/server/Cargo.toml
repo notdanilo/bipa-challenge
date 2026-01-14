@@ -8,4 +8,5 @@ tokio.workspace = true
 anyhow.workspace = true
 reqwest.workspace = true
 serde.workspace = true
-# thiserror.workspace = true
+actix-web.workspace = true
+thiserror.workspace = true

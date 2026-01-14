@@ -1,10 +1,10 @@
 use server::prelude::*;
 
-use server::data::mempool::Node;
+use server::WebServer;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let nodes = Node::get().await?;
-    println!("{:#?}", nodes);
+    WebServer::new("127.0.0.1", 8080).run().await?;
+
     Ok(())
 }

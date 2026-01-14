@@ -1,2 +1,2 @@
 pub use crate::error::*;
-pub(crate) use serde::{Deserialize};
+pub(crate) use serde::{Serialize, Deserialize};
