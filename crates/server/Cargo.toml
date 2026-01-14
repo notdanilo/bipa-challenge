@@ -12,3 +12,5 @@ serde_json.workspace = true
 actix-web.workspace = true
 thiserror.workspace = true
 chrono.workspace = true
+sqlx.workspace = true
+dotenv.workspace = true
