@@ -3,6 +3,7 @@ use crate::web::Node;
 use actix_web::web;
 use actix_web::{App, HttpServer, get, web::Json};
 
+#[derive(Clone)]
 pub struct WebServer {
     address: String,
     port: u16,

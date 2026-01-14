@@ -14,6 +14,12 @@ impl Database {
         &self.pool
     }
 
+    pub async fn migrate(&self) -> Result<()> {
+        tracing::info!("Running database migrations...");
+        sqlx::migrate!().run(self.pool()).await?;
+        tracing::info!("Database migrated.");
+        Ok(())
+    }
 
     pub async fn from_env() -> Result<Self> {
         let url = dotenv::var("DATABASE_URL")?;
@@ -55,7 +61,7 @@ impl Database {
             ORDER BY capacity DESC
             "#
         )
-        .fetch_all(&*self.pool)
+        .fetch_all(self.pool())
         .await?;
         Ok(nodes)
     }
