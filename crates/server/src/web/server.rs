@@ -22,6 +22,7 @@ impl WebServer {
 
     pub async fn run(self, database: &Database) -> Result<()> {
         let database = database.clone();
+        tracing::info!("Starting web server on {}:{}", self.address, self.port);
         HttpServer::new(move || {
             App::new()
                 .app_data(web::Data::new(database.clone()))
@@ -36,7 +37,9 @@ impl WebServer {
 }
 
 #[get("/nodes")]
+#[tracing::instrument(skip(database))]
 async fn nodes(database: web::Data<Database>) -> actix_web::Result<Json<Vec<Node>>> {
+    tracing::debug!("Handling /nodes request");
     let nodes = database.read_nodes().await?;
     let nodes = nodes.into_iter().map(Node::from).collect::<Vec<_>>(); // TODO: Avoid conversion
     Ok(Json(nodes))
